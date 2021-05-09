@@ -5,6 +5,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] int startingHealth = 3;
+    [SerializeField] GameObject targetObject;
     private int currentHealth;
 
     // Start is called before the first frame update
@@ -23,6 +24,10 @@ public class Health : MonoBehaviour
 
     public void Die()
     {
-        gameObject.SetActive(false);
+        var deathHandler = targetObject.GetComponent<GameOverScript>();
+        if (targetObject.name == "wizard_macanim Demo"){
+            deathHandler.HandleDeath();
+        }
+        targetObject.SetActive(false);
     }
 }

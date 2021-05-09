@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class fireball : MonoBehaviour
 {
+    int damage = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +16,16 @@ public class fireball : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void OnCollisionEnter(Collision collison)
+    {
+        var health = collison.gameObject.GetComponent<Health>();
+        if (health != null)
+        {
+            health.TakeDamage(damage);
+        }
+        Debug.Log("Something was hit");
+        this.gameObject.SetActive(false);
     }
 }

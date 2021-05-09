@@ -35,25 +35,25 @@ public class WeaponStaff : MonoBehaviour
     {
         GameObject instFireball = Instantiate(fireball, transform.position, Quaternion.identity) as GameObject;
         Rigidbody instFireballRigidbody = instFireball.GetComponent<Rigidbody>();
-        // instFireballRigidbody.AddForce(Vector3.forward * speed);
-
         instFireballRigidbody.AddRelativeForce(new Vector3(firePoint.forward.x * 30, firePoint.forward.y * 30, firePoint.forward.z * 30) * speed);
 
-        // 
+        // Debug.DrawRay(firePoint.position, firePoint.forward * 100, Color.red, 2f); 
+        // // Debug.Log("Hit object " + firePoint.transform.name);
 
-        Debug.DrawRay(firePoint.position, firePoint.forward * 100, Color.red, 2f); 
-        Debug.Log("Hit object " + firePoint.transform.name);
+        // Ray ray = new Ray(firePoint.position, firePoint.forward);
+        // RaycastHit hitInfo;
 
-        Ray ray = new Ray(firePoint.position, firePoint.forward);
-        RaycastHit hitInfo;
+        // // Debug.Log(instFireballRigidbody.GetComponent<collider>().tag);
 
-        if(Physics.Raycast(ray, out hitInfo, 100))
-        {
-            var health = hitInfo.collider.GetComponent<Health>();
-            if (health != null)
-            {
-                health.TakeDamage(damage);
-            }
-        }
+        // if(Physics.Raycast(ray, out hitInfo, 100))
+        // {
+        //     var health = hitInfo.collider.GetComponent<Health>();
+        //     if (health != null)
+        //     {
+        //         health.TakeDamage(damage);
+        //         // Destroy(instFireballRigidbody);
+        //     }
+
+        // }
     }
 }
