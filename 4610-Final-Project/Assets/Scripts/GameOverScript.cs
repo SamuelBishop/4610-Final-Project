@@ -14,7 +14,6 @@ public class GameOverScript : MonoBehaviour
 
     public void HandleDeath()
     {
-        SceneManager.LoadScene(0);
         gameOverCanvas.enabled = true;
         Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;

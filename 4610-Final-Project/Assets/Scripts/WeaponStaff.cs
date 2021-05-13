@@ -12,6 +12,8 @@ public class WeaponStaff : MonoBehaviour
     // For projectile
     [SerializeField] GameObject fireball;
     public float speed = 10f;
+    public float delayBetweenFireballs = 200000f;
+    public float lastFireballDate;
 
 
     [SerializeField] private ParticleSystem staffParticle;
@@ -20,6 +22,7 @@ public class WeaponStaff : MonoBehaviour
     void Start()
     {
         staffParticle.Play();
+        lastFireballDate = Time.time;
     }
 
     // Update is called once per frame
@@ -27,15 +30,20 @@ public class WeaponStaff : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            ShootFireball();
+            // ShootFireball();
+            if( (Time.time - lastFireballDate > delayBetweenFireballs)){
+                ShootFireball();
+            }
         }
     }
 
     private void ShootFireball()
     {
-        GameObject instFireball = Instantiate(fireball, transform.position, Quaternion.identity) as GameObject;
-        Rigidbody instFireballRigidbody = instFireball.GetComponent<Rigidbody>();
-        instFireballRigidbody.AddRelativeForce(new Vector3(firePoint.forward.x * 30, firePoint.forward.y * 30, firePoint.forward.z * 30) * speed);
+        StartCoroutine(waiter());
+        // lastFireballDate = Time.time;
+        // GameObject instFireball = Instantiate(fireball, transform.position, Quaternion.identity) as GameObject;
+        // Rigidbody instFireballRigidbody = instFireball.GetComponent<Rigidbody>();
+        // instFireballRigidbody.AddRelativeForce(new Vector3(firePoint.forward.x * 30, firePoint.forward.y * 30, firePoint.forward.z * 30) * speed);
 
         // Debug.DrawRay(firePoint.position, firePoint.forward * 100, Color.red, 2f); 
         // // Debug.Log("Hit object " + firePoint.transform.name);
@@ -55,5 +63,14 @@ public class WeaponStaff : MonoBehaviour
         //     }
 
         // }
+    }
+
+    IEnumerator waiter()
+    {
+        yield return new WaitForSeconds(.05f);
+        lastFireballDate = Time.time;
+        GameObject instFireball = Instantiate(fireball, transform.position, Quaternion.identity) as GameObject;
+        Rigidbody instFireballRigidbody = instFireball.GetComponent<Rigidbody>();
+        instFireballRigidbody.AddRelativeForce(new Vector3(firePoint.forward.x * 30, firePoint.forward.y * 30, firePoint.forward.z * 30) * speed);
     }
 }

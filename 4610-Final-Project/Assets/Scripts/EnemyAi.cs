@@ -9,6 +9,8 @@ public class EnemyAi : MonoBehaviour
     NavMeshAgent navMeshAgent;
     [SerializeField] float AttackCooldown = 4.0f;
     int damage = 1;
+    public int delayBetweenAttacks = 50;
+    public float lastAttackDate;
 
     // Placeholder
     float distanceToTarget = Mathf.Infinity;
@@ -17,6 +19,7 @@ public class EnemyAi : MonoBehaviour
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        lastAttackDate = Time.time;
         // var dispDamage = target.GetComponent<DisplayDamange>();
         // dispDamage.Start();
     }
@@ -37,7 +40,9 @@ public class EnemyAi : MonoBehaviour
         }
         else if (distanceToTarget <= navMeshAgent.stoppingDistance)
         {
-            AttackTarget();
+            if( (Time.time - lastAttackDate > delayBetweenAttacks)){
+                AttackTarget();
+            }
         }
     }
 
@@ -48,14 +53,10 @@ public class EnemyAi : MonoBehaviour
     private void AttackTarget(){
         var dispDamage = target.GetComponent<DisplayDamage>();
         var health = target.GetComponent<Health>();
-
-        // if (health != null)
-        // {
-        //     // health.TakeDamage(damage);
+        lastAttackDate = Time.time;
         StartDamage();
         dispDamage.ShowDamageImpact();
-        // }
-        // Debug.Log("Player Attacked");
+        Debug.Log("Player Attacked: Health = " + health.currentHealth);
     }
 
     // Part of attack

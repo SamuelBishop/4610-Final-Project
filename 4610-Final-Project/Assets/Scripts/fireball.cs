@@ -9,13 +9,7 @@ public class fireball : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        GetComponent<MeshRenderer>().enabled = false;
     }
 
     void OnCollisionEnter(Collision collison)
@@ -25,7 +19,6 @@ public class fireball : MonoBehaviour
         {
             health.TakeDamage(damage);
         }
-        Debug.Log("Something was hit");
-        this.gameObject.SetActive(false);
+        Destroy(this.gameObject);
     }
 }

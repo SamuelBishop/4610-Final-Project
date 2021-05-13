@@ -6,7 +6,8 @@ public class Health : MonoBehaviour
 {
     [SerializeField] int startingHealth = 3;
     [SerializeField] GameObject targetObject;
-    private int currentHealth;
+    public int currentHealth;
+    private int dead = 0;
 
     // Start is called before the first frame update
     private void OnEnable()
@@ -17,17 +18,22 @@ public class Health : MonoBehaviour
     public void TakeDamage(int damageAmount)
     {
         currentHealth -= damageAmount;
-        if(currentHealth <= 0){
+        if(currentHealth <= 0 && dead == 0){
             Die();
         }
     }
 
     public void Die()
     {
+        dead = 1;
         var deathHandler = targetObject.GetComponent<GameOverScript>();
-        if (targetObject.name == "wizard_macanim Demo"){
+        if (targetObject.name == "wizard_macanim DEMO"){
             deathHandler.HandleDeath();
         }
-        targetObject.SetActive(false);
+        else
+        {
+            targetObject.SetActive(false);
+        }
+        
     }
 }
