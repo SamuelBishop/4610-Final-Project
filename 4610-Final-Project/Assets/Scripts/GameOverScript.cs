@@ -18,7 +18,6 @@ public class GameOverScript : MonoBehaviour
         Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        Debug.Log("I DIED");
     }
 
     // public void HandleDeath()
