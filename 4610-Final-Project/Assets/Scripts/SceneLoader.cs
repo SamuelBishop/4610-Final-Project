@@ -8,6 +8,7 @@ public class SceneLoader : MonoBehaviour
     [SerializeField] Canvas heathCanvas;
     [SerializeField] Canvas gameStartCanvas;
     [SerializeField] Canvas gameOverCanvas;
+    [SerializeField] Canvas gameWinCanvas;
 
     // Start is called before the first frame update
     public void StartGame()
@@ -15,6 +16,7 @@ public class SceneLoader : MonoBehaviour
         heathCanvas.enabled = true;
         gameStartCanvas.enabled = false;
         gameOverCanvas.enabled = false;
+        gameWinCanvas.enabled = false;
         Time.timeScale = 1;
     }
 
@@ -24,6 +26,7 @@ public class SceneLoader : MonoBehaviour
         heathCanvas.enabled = true;
         gameStartCanvas.enabled = false;
         gameOverCanvas.enabled = false;
+        gameWinCanvas.enabled = false;
         Time.timeScale = 1;
     }
 

@@ -6,10 +6,12 @@ using UnityEngine.SceneManagement;
 public class GameOverScript : MonoBehaviour
 {
     [SerializeField] Canvas gameOverCanvas;
+    [SerializeField] Canvas gameWinCanvas;
     // Start is called before the first frame update
     void Start()
     {
         gameOverCanvas.enabled = false;
+        gameWinCanvas.enabled = false;
     }
 
     public void HandleDeath()
